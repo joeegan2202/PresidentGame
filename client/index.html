@@ -3,7 +3,6 @@
 	<head>
 		<title>President Game</title>
 		<meta charset="utf-8" />
-		<script src=main.js></script>
 	</head>
 	<body>
 		<div id="header">
@@ -13,5 +12,22 @@
 		<div id="placeholder">
 			<h3>Loading...</h3>
 		</div>
+
+		<div id="findGame" style="display:none;">
+			<h3>Find a Game</h3>
+			<input id="roomCode"></input>
+			<input id="playerName"></input>
+			<button id="find">Search</button>
+			<p>Status: inactive</p>
+		</div>
+
+		<div id="gamePlay" style="display:none;">
+			<h3>Play President!</h3>
+			<p id="status">Status...</p>
+			<input id="cards"></input>
+			<button id="play">Simulate Play</button>
+		</div>
+
+		<script src=main.js></script>
 	</body>
 </html>
