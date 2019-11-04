@@ -23,7 +23,7 @@ http.createServer( (req, res) => {
 		let room = game.find(qdat.room)
 		if (room !== 'invalid') {
 			console.log(`Connection established: Room: ${room.id}, Player ID: ${id}, Player Name: ${qdat.name}`)
-			room.players.push(new player(qdat.name, id))
+			room.players.push(new Player(qdat.name, id))
 			roomExisting = true
 		} else {
 			console.log(`Room not found`)
@@ -31,9 +31,9 @@ http.createServer( (req, res) => {
 
 			// TODO Fix with constructor function
 			game.rooms.push(
-				new room({
+				new Room({
 				id: code,
-				players: [new player(qdat.name,id)],
+				players: [new Player(qdat.name,id)],
 			}))
 			response += `"room":"${code}",`
 		}
@@ -54,7 +54,7 @@ http.createServer( (req, res) => {
 		let room = game.find(qdat.room)
 
 		if (room != 'invalid') {
-			room.requests.push(new request(qdat.id, JSON.parse(qdat.cards)))
+			room.requests.push(new Request(qdat.id, JSON.parse(qdat.cards)))
 			res.write('requested')
 		} else {
 			res.write('invalid')
@@ -120,7 +120,7 @@ var gameInterval = setInterval(playLoop, 1000)
 
 // ==============<++>==========================Classes============================================================================//
 
-let room = function (args) {
+let Room = function (args) {
 	this.id = (args.id) ? args.id : console.log('Room created without code!!!')
 	this.players = (args.players) ? args.players : []
 	this.state = {
@@ -134,12 +134,12 @@ let room = function (args) {
 	this.requests = []
 }
 
-let request = function (player, cards) {
+let Request = function (player, cards) {
 	this.player = (player) ? player : console.log('Request made with no player id given!!!')
 	this.cards = (cards) ? cards : console.log('Request made with no cards given!!!')
 }
 
-let player = function (name, id, cards) {
+let Player = function (name, id, cards) {
 	this.name = (name) ? name : console.log('Player created with no name!!!')
 	this.id = (id) ? id : console.log('Player created with no ID!!!')
 	this.cards = (cards) ? cards : []
